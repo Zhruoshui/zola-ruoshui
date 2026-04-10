@@ -1,0 +1,22 @@
+.ace-tool/
+.claude/
+openspec/
+
+# Zola build output and cache
+public/
+.zola-cache/
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+*~
+
+
+
+# direnv
+.direnv/
