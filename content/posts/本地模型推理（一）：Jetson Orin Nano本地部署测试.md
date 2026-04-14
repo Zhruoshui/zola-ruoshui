@@ -198,7 +198,7 @@ cmake --build build --config Release
 ### 如何下载模型权重
 下载模型权重统一从huggingface的国内镜像访问下载
 
-{{ ref_card(title="hf-mirror", url="https://hf-mirror.com/", image="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/hugging-face.png") }}
+{{ ref_card(title="hf-mirror", url="https://hf-mirror.com/", image="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/huggingmodel-face.png") }}
 
 下载模型可以使用网页端访问：
 
