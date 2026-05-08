@@ -466,5 +466,7 @@ https://github.com/HANCORE-linux/waybar-themes?tab=readme-ov-file#screenshots-v2
 7. 百度网盘 `yay -S baidunetdisk-bin`
 8. 文献阅读器zotero `yay -S zotero-bin`
 9. 跨平台ssh工具 `yay -S termius`
+10. tigervnc-viewer `tigervnc-viewer`
+11. 
 
 
