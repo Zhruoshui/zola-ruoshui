@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% import "macros/macros.html" as post_macros %}
+
+{% block main_content %}
+    {{ post_macros::page_header(title="Archive") }}
+
+    <style>
+        .archive-list { padding-top: 1rem; }
+        .archive-year {
+            font-family: var(--mono-text-font);
+            font-size: 1.1rem;
+            color: var(--text-color-secondary);
+            margin: 1.5rem 0 0.5rem;
+            font-weight: normal;
+        }
+        .archive-entries {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .archive-entry {
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+            padding: 0.2rem 0;
+        }
+        .archive-entry time {
+            font-family: var(--mono-text-font);
+            color: var(--text-color-secondary);
+            font-size: 0.9em;
+            flex-shrink: 0;
+        }
+        .archive-entry a { border-bottom: none; }
+        .archive-entry a:hover { color: var(--hover-color); }
+    </style>
+
+    <main class="archive-list">
+        {% set posts = get_section(path="posts/_index.md") %}
+        {% set_global current_year = "" %}
+        {% for page in posts.pages %}
+            {% set year = page.date | date(format="%Y") %}
+            {% if year != current_year %}
+                {% if not loop.first %}</ul>{% endif %}
+                <h2 class="archive-year">{{ year }}</h2>
+                <ul class="archive-entries">
+                {% set_global current_year = year %}
+            {% endif %}
+            <li class="archive-entry">
+                <time>{{ page.date | date(format="%m-%d") }}</time>
+                <a href="{{ page.permalink | safe }}">{{ page.title }}</a>
+            </li>
+            {% if loop.last %}</ul>{% endif %}
+        {% endfor %}
+    </main>
+{% endblock main_content %}
