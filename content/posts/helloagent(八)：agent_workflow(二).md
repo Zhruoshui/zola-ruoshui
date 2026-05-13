@@ -50,7 +50,7 @@ CodeStable 将软件开发活动抽象为 6 类实体，外加横切面"知识�
 | **问题** | issue | 开发完成后的 BUG 单子（report → analyze → fix） | 单次闭环 |
 | **知识** | compound | 复利工程的知识库：learning / trick / decision / explore | 永久积累 |
 
-```mermaid
+{% mermaid() %}
 graph TB
     subgraph 档案层["长效档案层（只记现状）"]
         REQ[requirements<br/>需求实体]
@@ -81,7 +81,7 @@ graph TB
     ISSUE -->|经验| COMPOUND
     COMPOUND -->|复用| FEAT
     COMPOUND -->|复用| ARCH
-```
+{% end %}
 
 **几点关键设计决策**：
 
@@ -93,7 +93,7 @@ graph TB
 
 CodeStable 定义了三条事件驱动的开发流程：
 
-```mermaid
+{% mermaid() %}
 graph LR
     subgraph 特性引入
         A1["cs-feat-design<br/>方案设计"] --> A2["cs-feat-impl<br/>逐步编码"] --> A3["cs-feat-accept<br/>验收闭环"]
@@ -106,7 +106,7 @@ graph LR
     subgraph 代码重构
         C1["cs-refactor<br/>重构主流程"]
     end
-```
+{% end %}
 
 流程设计的特点：
 
@@ -162,7 +162,7 @@ cs                # 根入口 · 路由分诊（本身不做事，只路由）
 2. 匹配场景路由表
 3. 输出路由建议 + 一句话理由
 
-```mermaid
+{% mermaid() %}
 graph TD
     CS[用户输入 /cs] --> SCAN{扫描 .codestable/}
     SCAN -->|不存在| ONBOARD["建议先 cs-onboard"]
@@ -176,7 +176,7 @@ graph TD
     ROUTE -->|"经验沉淀"| LEARN[cs-learn]
     ROUTE -->|"技术选型"| DECIDE[cs-decide]
     ROUTE -->|"摸代码/调研"| EXPLORE[cs-explore]
-```
+{% end %}
 
 **设计亮点**：`cs` 的"不做事"原则——只路由，不越界替子技能跑流程。这避免了入口膨胀，也迫使每个子技能保持独立可测试。
 
@@ -190,7 +190,7 @@ graph TD
 
 `cs-brainstorm` 是 CodeStable 最具"人味"的模块。它处理一个此前被所有工作流体系忽视的问题：**用户开口时通常不知道自己到底要什么**。
 
-```mermaid
+{% mermaid() %}
 graph TD
     START[用户说: 有个想法...] --> ASSESS{规模判断}
     ASSESS -->|"一句话说清 做什么/为谁/怎么算成功"| C1[case 1: 直接进 design]
@@ -199,7 +199,7 @@ graph TD
     ASSESS -->|"多feature规模 说不清模块边界"| C4[case 4: grill→发散→落盘<br/>存 brainstorms/→后续 roadmap 读取]
     
     C2 --> DESIGN[cs-feat-design]
-```
+{% end %}
 
 **核心哲学**：
 
@@ -279,7 +279,7 @@ graph TD
 
 CodeStable 的 `compound/` 是整套体系的 **"飞轮"**——任何流程跑完发现"这事值得记下来"都可以触发沉淀，沉淀的产物又会被下一次同类工作读到。
 
-```mermaid
+{% mermaid() %}
 graph LR
     subgraph 沉淀动作
         L[cs-learn<br/>踩坑/好做法] --> C[compound/]
@@ -293,7 +293,7 @@ graph LR
     C -->|下次工作时读| ARCH2[cs-arch]
     C -->|下次工作时读| ISSUE2[cs-issue-analyze]
     AT -->|每次技能启动必读| ALL[所有 cs-* 技能]
-```
+{% end %}
 
 **四种知识类型的判别口诀**：
 
